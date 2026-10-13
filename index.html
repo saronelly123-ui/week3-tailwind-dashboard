@@ -1,379 +1,334 @@
+
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" class="scroll-smooth">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Monthly Dashboard</title>
-  <link rel="stylesheet" href="./src/output.css" />
-  <script>
-    // Tailwind dark mode support
-    if (localStorage.getItem("dashboard-theme") === "dark") {
-      document.documentElement.classList.add("dark");
-    }
-  </script>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Nova Admin Dashboard</title>
+  <link rel="stylesheet" href="./src/output.css">
 </head>
 
-<body class="min-h-screen bg-slate-50 text-slate-900 transition-colors duration-300 dark:bg-slate-950 dark:text-white">
-
+<body class="bg-slate-100 text-slate-800 dark:bg-slate-950 dark:text-white">
   <div class="flex min-h-screen">
 
-    <!-- Sidebar -->
-    <aside class="hidden w-64 flex-col border-r border-slate-200 bg-white p-5 dark:border-slate-800 dark:bg-slate-900 md:flex">
-      <a href="#" class="mb-10 flex items-center gap-3 text-2xl font-bold text-indigo-600">
-        <span class="flex h-10 w-10 items-center justify-center rounded-xl bg-indigo-600 text-white">M</span>
-        Monthly Dashboard
-      </a>
+    <!-- Desktop Sidebar -->
+    <aside class="hidden md:flex w-64 shrink-0 flex-col bg-slate-900 p-6 text-white">
+      <h1 class="mb-10 text-2xl font-bold text-violet-400">Nova<span class="text-white">Panel</span></h1>
 
-      <p class="mb-3 text-xs font-semibold uppercase tracking-wider text-slate-400">Menu</p>
-
-      <nav class="space-y-2">
-        <a href="#dashboard" class="block rounded-xl bg-indigo-50 px-4 py-3 font-semibold text-indigo-600 dark:bg-indigo-950 dark:text-indigo-300">📊 Dashboard</a>
-        <a href="#analytics" class="block rounded-xl px-4 py-3 text-slate-600 hover:bg-slate-100 dark:text-slate-300 dark:hover:bg-slate-800">📈 Analytics</a>
-        <a href="#orders" class="block rounded-xl px-4 py-3 text-slate-600 hover:bg-slate-100 dark:text-slate-300 dark:hover:bg-slate-800">🛒 Orders</a>
-        <a href="#products" class="block rounded-xl px-4 py-3 text-slate-600 hover:bg-slate-100 dark:text-slate-300 dark:hover:bg-slate-800">📦 Products</a>
-        <a href="#team" class="block rounded-xl px-4 py-3 text-slate-600 hover:bg-slate-100 dark:text-slate-300 dark:hover:bg-slate-800">👥 Team</a>
-        <a href="#settings" class="block rounded-xl px-4 py-3 text-slate-600 hover:bg-slate-100 dark:text-slate-300 dark:hover:bg-slate-800">⚙️ Settings</a>
+      <nav class="space-y-3">
+        <a href="#dashboard" class="block rounded-xl bg-violet-600 px-4 py-3">▦ Dashboard</a>
+        <a href="#orders" class="block rounded-xl px-4 py-3 hover:bg-slate-800">🛒 Orders</a>
+        <a href="#customers" class="block rounded-xl px-4 py-3 hover:bg-slate-800">👥 Customers</a>
+        <a href="#analytics" class="block rounded-xl px-4 py-3 hover:bg-slate-800">📊 Analytics</a>
+        <a href="#team" class="block rounded-xl px-4 py-3 hover:bg-slate-800">⚙ Settings</a>
+        <a href="#team" class="block rounded-xl px-4 py-3 hover:bg-slate-800">💬 Support</a>
       </nav>
 
-      <div class="mt-auto rounded-2xl bg-indigo-50 p-4 dark:bg-slate-800">
-        <p class="font-semibold text-slate-800 dark:text-white">Need help?</p>
-        <p class="mt-1 text-sm text-slate-500 dark:text-slate-400">Contact our support team.</p>
-        <button class="mt-3 w-full rounded-lg bg-indigo-600 px-3 py-2 text-sm font-semibold text-white hover:bg-indigo-700">Get Support</button>
+      <div class="mt-auto rounded-2xl bg-slate-800 p-4">
+        <p class="font-semibold">Need help?</p>
+        <p class="mt-1 text-sm text-slate-400">Contact our support team.</p>
       </div>
     </aside>
-    <!-- Mobile Navigation -->
-      <nav class="mb-4 space-y-2 rounded-xl border border-slate-200 bg-white p-3 dark:border-slate-700 dark:bg-slate-900 md:hidden">
-       <a href="#dashboard" class="block rounded-lg p-3 hover:bg-slate-100 dark:hover:bg-slate-800">📊 Dashboard</a>
-       <a href="#analytics" class="block rounded-lg p-3 hover:bg-slate-100 dark:hover:bg-slate-800">📈 Analytics</a>
-       <a href="#orders" class="block rounded-lg p-3 hover:bg-slate-100 dark:hover:bg-slate-800">🛒 Orders</a>
-       <a href="#products" class="block rounded-lg p-3 hover:bg-slate-100 dark:hover:bg-slate-800">📦 Products</a>
-       <a href="#team" class="block rounded-lg p-3 hover:bg-slate-100 dark:hover:bg-slate-800">👥 Team</a>
-      </nav>
+
     <!-- Main Content -->
-    <main id="dashboard" class="min-w-0 flex-1">
+    <main id="dashboard" class="min-w-0 flex-1 p-4 sm:p-6 lg:p-8">
 
-      <!-- Topbar -->
-      <header class="sticky top-0 z-10 flex flex-wrap items-center justify-between gap-4 border-b border-slate-200 bg-white/90 px-4 py-4 backdrop-blur dark:border-slate-800 dark:bg-slate-900/90 sm:px-8">
-        <div>
-          <h1 class="text-xl font-bold sm:text-2xl">Dashboard</h1>
-          <p class="text-sm text-slate-500 dark:text-slate-400">Welcome back! Here's what's happening.</p>
-        </div>
-
-        <div class="flex flex-wrap items-center gap-3">
-          <button
-            id="theme-toggle"
-            type="button"
-            class="rounded-xl border border-slate-200 px-3 py-2 text-sm font-semibold hover:bg-slate-100 dark:border-slate-700 dark:hover:bg-slate-800"
-            aria-label="Toggle dark mode"
-          >🌙 Dark Mode</button>
-
-          <button class="relative rounded-xl border border-slate-200 p-3 hover:bg-slate-100 dark:border-slate-700 dark:hover:bg-slate-800" aria-label="Notifications">
-            🔔
-            <span class="absolute right-2 top-2 h-2 w-2 rounded-full bg-red-500"></span>
+      <!-- Header -->
+      <header class="mb-8 flex flex-wrap items-center justify-between gap-4">
+        <div class="flex items-center gap-3">
+          <button id="menu-button"
+            class="rounded-lg border border-slate-300 bg-white px-3 py-2 text-xl text-slate-800 md:hidden"
+            aria-controls="mobile-nav"
+            aria-expanded="false"
+            aria-label="Open menu"
+            type="button">
+            ☰
           </button>
 
-          <div class="flex items-center gap-3">
-            <div class="flex h-10 w-10 items-center justify-center rounded-full bg-indigo-100 font-bold text-indigo-700 dark:bg-indigo-950 dark:text-indigo-300">SN</div>
-            <div class="hidden sm:block">
-              <p class="text-sm font-semibold">Saro Nelly</p>
-              <p class="text-xs text-slate-500 dark:text-slate-400">Administrator</p>
-            </div>
+          <div>
+            <h2 class="text-2xl font-bold sm:text-3xl">Dashboard</h2>
+            <p class="mt-1 text-sm text-slate-500 dark:text-slate-400">
+              Welcome back! Here's your overview.
+            </p>
+          </div>
+        </div>
+
+        <div class="flex items-center gap-3">
+          <button id="theme-button"
+            class="rounded-xl border border-slate-200 bg-white px-3 py-2 text-sm dark:border-slate-700 dark:bg-slate-800"
+            type="button">
+            🌙 Dark mode
+          </button>
+
+          <div class="flex h-10 w-10 items-center justify-center rounded-full bg-violet-600 font-bold text-white">
+            SN
           </div>
         </div>
       </header>
 
-      <div class="space-y-8 p-4 sm:p-8">
+      <!-- Mobile Menu -->
+      <nav id="mobile-nav"
+        class="mb-6 hidden rounded-2xl bg-slate-900 p-4 text-white md:hidden">
+        <div class="grid grid-cols-2 gap-2">
+          <a href="#dashboard" class="rounded-lg bg-violet-600 p-3">▦ Dashboard</a>
+          <a href="#orders" class="rounded-lg p-3 hover:bg-slate-800">🛒 Orders</a>
+          <a href="#customers" class="rounded-lg p-3 hover:bg-slate-800">👥 Customers</a>
+          <a href="#analytics" class="rounded-lg p-3 hover:bg-slate-800">📊 Analytics</a>
+          <a href="#team" class="rounded-lg p-3 hover:bg-slate-800">⚙ Settings</a>
+          <a href="#team" class="rounded-lg p-3 hover:bg-slate-800">💬 Support</a>
+        </div>
+      </nav>
 
-        <!-- Welcome -->
-        <section>
-          <h2 class="text-2xl font-bold">Good evening, Saro! 👋</h2>
-          <p class="mt-1 text-slate-500 dark:text-slate-400">Here is an overview of your business today.</p>
-        </section>
+      <!-- Statistics -->
+      <section class="mb-8 grid grid-cols-1 gap-5 sm:grid-cols-2 xl:grid-cols-4">
+        <article class="rounded-2xl bg-white p-5 shadow-sm dark:bg-slate-900">
+          <p class="text-sm text-slate-500">Total Revenue</p>
+          <h3 class="mt-3 text-2xl font-bold">$24,780</h3>
+          <p class="mt-2 text-sm font-medium text-green-600">↑ 12.8% this month</p>
+        </article>
 
-        <!-- Statistics -->
-        <section class="grid grid-cols-1 gap-5 sm:grid-cols-2 xl:grid-cols-4">
-          <div class="rounded-2xl border border-slate-200 bg-white p-5 shadow-sm dark:border-slate-800 dark:bg-slate-900">
-            <div class="flex items-center justify-between">
-              <p class="text-sm text-slate-500 dark:text-slate-400">Total Revenue</p>
-              <span class="rounded-xl bg-indigo-50 p-3 dark:bg-indigo-950">💰</span>
-            </div>
-            <p class="mt-4 text-3xl font-bold">RWF 8.4M</p>
-            <p class="mt-2 text-sm font-semibold text-emerald-600">↑ 12.5% <span class="font-normal text-slate-500 dark:text-slate-400">from last month</span></p>
-          </div>
+        <article id="orders-stat" class="rounded-2xl bg-white p-5 shadow-sm dark:bg-slate-900">
+          <p class="text-sm text-slate-500">Total Orders</p>
+          <h3 class="mt-3 text-2xl font-bold">1,284</h3>
+          <p class="mt-2 text-sm font-medium text-green-600">↑ 8.2% this month</p>
+        </article>
 
-          <div class="rounded-2xl border border-slate-200 bg-white p-5 shadow-sm dark:border-slate-800 dark:bg-slate-900">
-            <div class="flex items-center justify-between">
-              <p class="text-sm text-slate-500 dark:text-slate-400">Total Orders</p>
-              <span class="rounded-xl bg-amber-50 p-3 dark:bg-amber-950">🛒</span>
-            </div>
-            <p class="mt-4 text-3xl font-bold">1,284</p>
-            <p class="mt-2 text-sm font-semibold text-emerald-600">↑ 8.2% <span class="font-normal text-slate-500 dark:text-slate-400">from last month</span></p>
-          </div>
+        <article id="customers" class="rounded-2xl bg-white p-5 shadow-sm dark:bg-slate-900">
+          <p class="text-sm text-slate-500">Total Customers</p>
+          <h3 class="mt-3 text-2xl font-bold">8,549</h3>
+          <p class="mt-2 text-sm font-medium text-green-600">↑ 5.4% this month</p>
+        </article>
 
-          <div class="rounded-2xl border border-slate-200 bg-white p-5 shadow-sm dark:border-slate-800 dark:bg-slate-900">
-            <div class="flex items-center justify-between">
-              <p class="text-sm text-slate-500 dark:text-slate-400">Total Customers</p>
-              <span class="rounded-xl bg-sky-50 p-3 dark:bg-sky-950">👥</span>
-            </div>
-            ```html
-      <p class="mt-4 text-3xl font-bold">3,642</p>
-        <p class="mt-2 text-sm font-semibold text-emerald-600">
-        ↑6.4%
-       <span class="font-normal text-slate-500 dark:text-slate-400">
-           from last month
-         </span>
-           </p>
-            <p class="mt-3 text-xs text-slate-400">
-            Active customers this month
-            </p>
-```
+        <article class="rounded-2xl bg-white p-5 shadow-sm dark:bg-slate-900">
+          <p class="text-sm text-slate-500">Pending Orders</p>
+          <h3 class="mt-3 text-2xl font-bold">36</h3>
+          <p class="mt-2 text-sm font-medium text-amber-600">Needs attention</p>
+        </article>
+      </section>
 
-            <p class="mt-2 text-sm font-semibold text-emerald-600">↑ 6.4% <span class="font-normal text-slate-500 dark:text-slate-400">from last month</span></p>
-          </div>
-
-          <div class="rounded-2xl border border-slate-200 bg-white p-5 shadow-sm dark:border-slate-800 dark:bg-slate-900">
-            <div class="flex items-center justify-between">
-              <p class="text-sm text-slate-500 dark:text-slate-400">Pending Orders</p>
-              <span class="rounded-xl bg-rose-50 p-3 dark:bg-rose-950">⏳</span>
-            </div>
-            <p class="mt-4 text-3xl font-bold">24</p>
-            <p class="mt-2 text-sm font-semibold text-rose-600">Needs attention</p>
-          </div>
-        </section>
-
-        <!-- Revenue Chart -->
-        <section id="analytics" class="rounded-2xl border border-slate-200 bg-white p-5 shadow-sm dark:border-slate-800 dark:bg-slate-900 sm:p-6">
+      <!-- Analytics -->
+      <section id="analytics" class="mb-8 grid grid-cols-1 gap-5 lg:grid-cols-3">
+        <div class="rounded-2xl bg-white p-6 shadow-sm dark:bg-slate-900 lg:col-span-2">
           <div class="mb-6 flex flex-wrap items-center justify-between gap-3">
             <div>
-              <h2 class="text-lg font-bold">Revenue Overview</h2>
-              <p class="text-sm text-slate-500 dark:text-slate-400">Monthly revenue performance</p>
+              <h3 class="text-lg font-bold">Revenue Overview</h3>
+              <p class="text-sm text-slate-500">Monthly performance</p>
             </div>
-            <select class="rounded-lg border border-slate-200 bg-white px-3 py-2 text-sm dark:border-slate-700 dark:bg-slate-800">
-              <option>Last 7 months</option>
-              <option>Last 30 days</option>
-              <option>This year</option>
-            </select>
+            <span class="rounded-lg bg-violet-100 px-3 py-2 text-sm text-violet-700">This year</span>
           </div>
 
-          <div class="flex h-56 items-end justify-around gap-3 border-b border-l border-slate-200 px-3 dark:border-slate-700">
-            <div class="flex h-full w-8 flex-col justify-end"><div class="rounded-t-lg bg-indigo-300" style="height: 35%"></div><span class="py-2 text-center text-xs text-slate-500">Mar</span></div>
-            <div class="flex h-full w-8 flex-col justify-end"><div class="rounded-t-lg bg-indigo-400" style="height: 48%"></div><span class="py-2 text-center text-xs text-slate-500">Apr</span></div>
-            <div class="flex h-full w-8 flex-col justify-end"><div class="rounded-t-lg bg-indigo-500" style="height: 42%"></div><span class="py-2 text-center text-xs text-slate-500">May</span></div>
-            <div class="flex h-full w-8 flex-col justify-end"><div class="rounded-t-lg bg-indigo-400" style="height: 65%"></div><span class="py-2 text-center text-xs text-slate-500">Jun</span></div>
-            <div class="flex h-full w-8 flex-col justify-end"><div class="rounded-t-lg bg-indigo-500" style="height: 58%"></div><span class="py-2 text-center text-xs text-slate-500">Jul</span></div>
-            <div class="flex h-full w-8 flex-col justify-end"><div class="rounded-t-lg bg-indigo-600" style="height: 82%"></div><span class="py-2 text-center text-xs text-slate-500">Aug</span></div>
-            <div class="flex h-full w-8 flex-col justify-end"><div class="rounded-t-lg bg-indigo-700" style="height: 95%"></div><span class="py-2 text-center text-xs text-slate-500">Sep</span></div>
-          </div>
-        </section>
-
-        <!-- Orders Table -->
-        <section id="orders" class="overflow-hidden rounded-2xl border border-slate-200 bg-white shadow-sm dark:border-slate-800 dark:bg-slate-900">
-          <div class="flex flex-wrap items-center justify-between gap-3 p-5 sm:p-6">
-            <
-<div>
-  <h2 class="text-lg font-bold">Recent Orders</h2>
-  <p class="text-sm text-slate-500 dark:text-slate-400">
-    Track your latest customer orders.
-  </p>
-  <input
-    id="order-search"
-    type="search"
-    placeholder="Search orders or customers..."
-    aria-label="Search orders by ID or customer"
-    class="mt-3 w-full rounded-xl border border-slate-200 bg-white px-4 py-2 text-sm outline-none focus:border-indigo-500 dark:border-slate-700 dark:bg-slate-800 sm:max-w-xs"
-  />
-</div>
-            <button class="rounded-xl bg-indigo-600 px-4 py-2 text-sm font-semibold text-white hover:bg-indigo-700">View All</button>
+          <div class="flex h-48 items-end justify-around gap-3 border-b border-slate-200 dark:border-slate-700">
+            <div class="h-[35%] w-8 rounded-t-lg bg-violet-300 sm:w-12"></div>
+            <div class="h-[55%] w-8 rounded-t-lg bg-violet-400 sm:w-12"></div>
+            <div class="h-[45%] w-8 rounded-t-lg bg-violet-300 sm:w-12"></div>
+            <div class="h-[75%] w-8 rounded-t-lg bg-violet-500 sm:w-12"></div>
+            <div class="h-[60%] w-8 rounded-t-lg bg-violet-400 sm:w-12"></div>
+            <div class="h-[90%] w-8 rounded-t-lg bg-violet-600 sm:w-12"></div>
+            <div class="h-[70%] w-8 rounded-t-lg bg-violet-400 sm:w-12"></div>
           </div>
 
-          <div class="overflow-x-auto">
-            <table class="w-full min-w-[650px] text-left text-sm">
-              <thead class="bg-slate-50 text-xs uppercase text-slate-500 dark:bg-slate-800 dark:text-slate-300">
-                <tr>
-                  <th class="px-6 py-4">Order ID</th>
-                  <th class="px-6 py-4">Customer</th>
-                  <th class="px-6 py-4">Date</th>
-                  <th class="px-6 py-4">Amount</th>
-                  <th class="px-6 py-4">Status</th>
-                </tr>
-              </thead>
-              <tbody class="divide-y divide-slate-200 dark:divide-slate-800">
-                <tr>
-                  <td class="px-6 py-4 font-semibold">#ORD-1001</td>
-                  <td class="px-6 py-4">Alice Uwase</td>
-                  <td class="px-6 py-4 text-slate-500 dark:text-slate-400">Oct 11, 2026</td>
-                  <td class="px-6 py-4">RWF 125,000</td>
-                  <td class="px-6 py-4"><span class="rounded-full bg-emerald-100 px-3 py-1 text-xs font-semibold text-emerald-700 dark:bg-emerald-950 dark:text-emerald-300">Completed</span></td>
-                </tr>
-                <tr>
-                  <td class="px-6 py-4 font-semibold">#ORD-1002</td>
-                  <td class="px-6 py-4">Jeanine Mukamana</td>
-                  <td class="px-6 py-4 text-slate-500 dark:text-slate-400">Oct 10, 2026</td>
-                  <td class="px-6 py-4">RWF 89,000</td>
-                  <td class="px-6 py-4"><span class="rounded-full bg-amber-100 px-3 py-1 text-xs font-semibold text-amber-700 dark:bg-amber-950 dark:text-amber-300">Pending</span></td>
-                </tr>
-                <tr>
-                  <td class="px-6 py-4 font-semibold">#ORD-1003</td>
-                  <td class="px-6 py-4">David Nkurunziza</td>
-                  <td class="px-6 py-4 text-slate-500 dark:text-slate-400">Oct 10, 2026</td>
-                  <td class="px-6 py-4">RWF 210,000</td>
-                  <td class="px-6 py-4"><span class="rounded-full bg-sky-100 px-3 py-1 text-xs font-semibold text-sky-700 dark:bg-sky-950 dark:text-sky-300">Processing</span></td>
-                </tr>
-                <tr>
-                  <td class="px-6 py-4 font-semibold">#ORD-1004</td>
-                  <td class="px-6 py-4">Eric Habimana</td>
-                  <td class="px-6 py-4 text-slate-500 dark:text-slate-400">Oct 9, 2026</td>
-                  <td class="px-6 py-4">RWF 65,000</td>
-                  <td class="px-6 py-4"><span class="rounded-full bg-emerald-100 px-3 py-1 text-xs font-semibold text-emerald-700 dark:bg-emerald-950 dark:text-emerald-300">Completed</span></td>
-                </tr>
-                <tr>
-                  <td class="px-6 py-4 font-semibold">#ORD-1005</td>
-                  <td class="px-6 py-4">Grace Uwimana</td>
-                  <td class="px-6 py-4 text-slate-500 dark:text-slate-400">Oct 8, 2026</td>
-                  <td class="px-6 py-4">RWF 150,000</td>
-                  <td class="px-6 py-4"><span class="rounded-full bg-rose-100 px-3 py-1 text-xs font-semibold text-rose-700 dark:bg-rose-950 dark:text-rose-300">Cancelled</span></td>
-                </tr>
-                <tr>
-                  <td class="px-6 py-4 font-semibold">#ORD-1006</td>
-                  <td class="px-6 py-4">Patrick Mugisha</td>
-                  <td class="px-6 py-4 text-slate-500 dark:text-slate-400">Oct 7, 2026</td>
-                  <td class="px-6 py-4">RWF 98,000</td>
-                  <td class="px-6 py-4"><span class="rounded-full bg-amber-100 px-3 py-1 text-xs font-semibold text-amber-700 dark:bg-amber-950 dark:text-amber-300">Pending</span></td>
-                </tr>
-              </tbody>
-            </table>
+          <div class="mt-3 flex justify-around text-xs text-slate-500">
+            <span>Jan</span><span>Feb</span><span>Mar</span>
+            <span>Apr</span><span>May</span><span>Jun</span><span>Jul</span>
           </div>
-        </section>
+        </div>
 
-        <!-- Products and Activity -->
-        <section class="grid grid-cols-1 gap-6 lg:grid-cols-2">
-          <div id="products" class="rounded-2xl border border-slate-200 bg-white p-5 shadow-sm dark:border-slate-800 dark:bg-slate-900">
-            <div class="mb-5 flex items-center justify-between">
-              <h2 class="text-lg font-bold">Top Products</h2>
-              <button class="text-sm font-semibold text-indigo-600">See all</button>
+        <div class="rounded-2xl bg-white p-6 shadow-sm dark:bg-slate-900">
+          <h3 class="text-lg font-bold">Order Status</h3>
+          <p class="mt-1 text-sm text-slate-500">Current orders</p>
+
+          <div class="mt-6 space-y-5">
+            <div>
+              <div class="mb-2 flex justify-between text-sm">
+                <span>Completed</span><span>68%</span>
+              </div>
+              <div class="h-2 rounded-full bg-slate-100 dark:bg-slate-800">
+                <div class="h-2 w-[68%] rounded-full bg-green-500"></div>
+              </div>
             </div>
-            <div class="space-y-5">
-              <div class="flex items-center gap-4">
-                <div class="flex h-12 w-12 items-center justify-center rounded-xl bg-pink-100 text-xl">👕</div>
-                <div class="flex-1"><p class="font-semibold">Classic T-Shirt</p><p class="text-sm text-slate-500 dark:text-slate-400">320 sold</p></div>
-                <p class="font-semibold">RWF 15,000</p>
+
+            <div>
+              <div class="mb-2 flex justify-between text-sm">
+                <span>Processing</span><span>22%</span>
               </div>
-              <div class="flex items-center gap-4">
-                <div class="flex h-12 w-12 items-center justify-center rounded-xl bg-amber-100 text-xl">👟</div>
-                <div class="flex-1"><p class="font-semibold">Sport Sneakers</p><p class="text-sm text-slate-500 dark:text-slate-400">210 sold</p></div>
-                <p class="font-semibold">RWF 45,000</p>
+              <div class="h-2 rounded-full bg-slate-100 dark:bg-slate-800">
+                <div class="h-2 w-[22%] rounded-full bg-violet-500"></div>
               </div>
-              <div class="flex items-center gap-4">
-                <div class="flex h-12 w-12 items-center justify-center rounded-xl bg-sky-100 text-xl">🎒</div>
-                <div class="flex-1"><p class="font-semibold">Travel Backpack</p><p class="text-sm text-slate-500 dark:text-slate-400">185 sold</p></div>
-                <p class="font-semibold">RWF 28,000</p>
+            </div>
+
+            <div>
+              <div class="mb-2 flex justify-between text-sm">
+                <span>Pending</span><span>10%</span>
+              </div>
+              <div class="h-2 rounded-full bg-slate-100 dark:bg-slate-800">
+                <div class="h-2 w-[10%] rounded-full bg-amber-500"></div>
               </div>
             </div>
           </div>
+        </div>
+      </section>
 
-          <div class="rounded-2xl border border-slate-200 bg-white p-5 shadow-sm dark:border-slate-800 dark:bg-slate-900">
-            <h2 class="mb-5 text-lg font-bold">Recent Activity</h2>
-            <div class="space-y-5">
-              <div class="flex gap-3">
-                <span class="flex h-9 w-9 items-center justify-center rounded-full bg-emerald-100">✓</span>
-                <div><p class="text-sm font-semibold">New order completed</p><p class="text-sm text-slate-500 dark:text-slate-400">Order #ORD-1001 was completed.</p><p class="mt-1 text-xs text-slate-400">10 minutes ago</p></div>
-              </div>
-              <div class="flex gap-3">
-                <span class="flex h-9 w-9 items-center justify-center rounded-full bg-sky-100">👤</span>
-                <div><p class="text-sm font-semibold">New customer registered</p><p class="text-sm text-slate-500 dark:text-slate-400">A new customer joined your store.</p><p class="mt-1 text-xs text-slate-400">35 minutes ago</p></div>
-              </div>
-              <div class="flex gap-3">
-                <span class="flex h-9 w-9 items-center justify-center rounded-full bg-amber-100">📦</span>
-                <div><p class="text-sm font-semibold">Product stock updated</p><p class="text-sm text-slate-500 dark:text-slate-400">Classic T-Shirt stock was updated.</p><p class="mt-1 text-xs text-slate-400">1 hour ago</p></div>
-              </div>
-            </div>
+      <!-- Orders Table -->
+      <section id="orders" class="mb-8 overflow-hidden rounded-2xl bg-white shadow-sm dark:bg-slate-900">
+        <div class="flex flex-wrap items-center justify-between gap-4 p-5">
+          <div>
+            <h3 class="text-lg font-bold">Recent Orders</h3>
+            <p class="text-sm text-slate-500">Manage your latest orders</p>
           </div>
-        </section>
 
-        <!-- Add Team Member Form -->
-        <section id="team" class="rounded-2xl border border-slate-200 bg-white p-5 shadow-sm dark:border-slate-800 dark:bg-slate-900 sm:p-6">
-          <h2 class="text-lg font-bold">Add Team Member</h2>
-          <p class="mb-5 text-sm text-slate-500 dark:text-slate-400">Add a new person to your team.</p>
+          <input id="order-search"
+            type="search"
+            placeholder="Search orders..."
+            class="w-full rounded-xl border border-slate-200 bg-white px-4 py-2 text-sm outline-none focus:border-violet-500 dark:border-slate-700 dark:bg-slate-800 sm:w-56">
+        </div>
 
-          <form id="team-form" class="grid grid-cols-1 gap-4 sm:grid-cols-2">
-            <label class="block">
-              <span class="mb-2 block text-sm font-semibold">Full Name</span>
-              <input id="member-name" required type="text" placeholder="Enter full name" class="w-full rounded-xl border border-slate-200 bg-white px-4 py-3 outline-none focus:border-indigo-500 dark:border-slate-700 dark:bg-slate-800" />
-            </label>
+        <div class="overflow-x-auto">
+          <table class="w-full min-w-[600px] text-left text-sm">
+            <thead class="bg-slate-50 text-slate-500 dark:bg-slate-800">
+              <tr>
+                <th class="px-5 py-4">Order ID</th>
+                <th class="px-5 py-4">Customer</th>
+                <th class="px-5 py-4">Date</th>
+                <th class="px-5 py-4">Amount</th>
+                <th class="px-5 py-4">Status</th>
+              </tr>
+            </thead>
 
-            <label class="block">
-              <span class="mb-2 block text-sm font-semibold">Email Address</span>
-              <input id="member-email" required type="email" placeholder="Enter email address" class="w-full rounded-xl border border-slate-200 bg-white px-4 py-3 outline-none focus:border-indigo-500 dark:border-slate-700 dark:bg-slate-800" />
-            </label>
+            <tbody id="orders-body" class="divide-y divide-slate-100 dark:divide-slate-800">
+              <tr>
+                <td class="px-5 py-4 font-medium">#ORD-1001</td>
+                <td class="px-5 py-4">Alice Johnson</td>
+                <td class="px-5 py-4">Oct 10, 2026</td>
+                <td class="px-5 py-4">$240.00</td>
+                <td class="px-5 py-4"><span class="rounded-full bg-green-100 px-3 py-1 text-green-700">Completed</span></td>
+              </tr>
+              <tr>
+                <td class="px-5 py-4 font-medium">#ORD-1002</td>
+                <td class="px-5 py-4">David Smith</td>
+                <td class="px-5 py-4">Oct 11, 2026</td>
+                <td class="px-5 py-4">$125.00</td>
+                <td class="px-5 py-4"><span class="rounded-full bg-amber-100 px-3 py-1 text-amber-700">Pending</span></td>
+              </tr>
+              <tr>
+                <td class="px-5 py-4 font-medium">#ORD-1003</td>
+                <td class="px-5 py-4">Mary Cooper</td>
+                <td class="px-5 py-4">Oct 12, 2026</td>
+                <td class="px-5 py-4">$380.00</td>
+                <td class="px-5 py-4"><span class="rounded-full bg-blue-100 px-3 py-1 text-blue-700">Processing</span></td>
+              </tr>
+              <tr>
+                <td class="px-5 py-4 font-medium">#ORD-1004</td>
+                <td class="px-5 py-4">John Miller</td>
+                <td class="px-5 py-4">Oct 13, 2026</td>
+                <td class="px-5 py-4">$95.00</td>
+                <td class="px-5 py-4"><span class="rounded-full bg-green-100 px-3 py-1 text-green-700">Completed</span></td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </section>
 
-            <label class="block">
-              <span class="mb-2 block text-sm font-semibold">Role</span>
-              <select id="member-role" class="w-full rounded-xl border border-slate-200 bg-white px-4 py-3 outline-none focus:border-indigo-500 dark:border-slate-700 dark:bg-slate-800">
-                <option>Administrator</option>
-                <option>Manager</option>
-                <option>Sales</option>
-                <option>Support</option>
-              </select>
-            </label>
+      <!-- Team Form -->
+      <section id="team" class="rounded-2xl bg-white p-6 shadow-sm dark:bg-slate-900">
+        <h3 class="text-lg font-bold">Add Team Member</h3>
+        <p class="mt-1 text-sm text-slate-500">Add a new member to your team.</p>
 
-            <div class="flex items-end">
-              <button type="submit" class="w-full rounded-xl bg-indigo-600 px-5 py-3 font-semibold text-white hover:bg-indigo-700">Add Member</button>
-            </div>
-          </form>
+        <form id="team-form" class="mt-5 grid grid-cols-1 gap-4 sm:grid-cols-2">
+          <input id="member-name" type="text" placeholder="Full name" required
+            class="rounded-xl border border-slate-200 bg-white px-4 py-3 outline-none focus:border-violet-500 dark:border-slate-700 dark:bg-slate-800">
 
-          <p id="form-message" class="mt-4 hidden rounded-xl bg-emerald-50 p-3 text-sm font-semibold text-emerald-700 dark:bg-emerald-950 dark:text-emerald-300" role="status"></p>
-        </section>
+          <input id="member-email" type="email" placeholder="Email address" required
+            class="rounded-xl border border-slate-200 bg-white px-4 py-3 outline-none focus:border-violet-500 dark:border-slate-700 dark:bg-slate-800">
 
-        <footer id="settings" class="pb-4 text-center text-sm text-slate-500 dark:text-slate-400">
-          © 2026 Monthly Dashboard. All rights reserved.
-        </footer>
+          <button type="submit"
+            class="rounded-xl bg-violet-600 px-5 py-3 font-semibold text-white hover:bg-violet-700 sm:col-span-2">
+            + Add Member
+          </button>
+        </form>
 
-      </div>
+        <p id="form-message" class="mt-3 text-sm text-green-600" role="status"></p>
+        <ul id="team-list" class="mt-4 space-y-2"></ul>
+      </section>
+
+      <footer class="py-6 text-center text-sm text-slate-500">
+        © 2026 NovaPanel. All rights reserved.
+      </footer>
+
     </main>
   </div>
 
   <script>
-    const themeToggle = document.getElementById("theme-toggle");
+    // Mobile menu
+    const menuButton = document.getElementById("menu-button");
+    const mobileNav = document.getElementById("mobile-nav");
 
-    function updateThemeButton() {
-      const isDark = document.documentElement.classList.contains("dark");
-      themeToggle.textContent = isDark ? "☀️ Light Mode" : "🌙 Dark Mode";
-    }
-
-    updateThemeButton();
-
-    themeToggle.addEventListener("click", function () {
-      const isDark = document.documentElement.classList.toggle("dark");
-      localStorage.setItem("dashboard-theme", isDark ? "dark" : "light");
-      updateThemeButton();
+    menuButton.addEventListener("click", () => {
+      const isHidden = mobileNav.classList.toggle("hidden");
+      menuButton.textContent = isHidden ? "☰" : "✕";
+      menuButton.setAttribute("aria-expanded", String(!isHidden));
+      menuButton.setAttribute("aria-label", isHidden ? "Open menu" : "Close menu");
     });
 
-const orderSearch = document.getElementById("order-search");
-const orderRows = document.querySelectorAll("#orders tbody tr");
+    mobileNav.querySelectorAll("a").forEach(link => {
+      link.addEventListener("click", () => {
+        mobileNav.classList.add("hidden");
+        menuButton.textContent = "☰";
+        menuButton.setAttribute("aria-expanded", "false");
+        menuButton.setAttribute("aria-label", "Open menu");
+      });
+    });
 
-orderSearch.addEventListener("input", function () {
-  const searchTerm = orderSearch.value.toLowerCase().trim();
+    // Dark mode
+    const themeButton = document.getElementById("theme-button");
 
-  orderRows.forEach(function (row) {
-    const orderText = row.textContent.toLowerCase();
-    row.hidden = !orderText.includes(searchTerm);
-  });
-});
+    themeButton.addEventListener("click", () => {
+      document.documentElement.classList.toggle("dark");
+      const darkEnabled = document.documentElement.classList.contains("dark");
+      themeButton.textContent = darkEnabled ? "☀ Light mode" : "🌙 Dark mode";
+    });
+
+    // Search orders
+    const orderSearch = document.getElementById("order-search");
+    const orderRows = document.querySelectorAll("#orders-body tr");
+
+    orderSearch.addEventListener("input", () => {
+      const searchText = orderSearch.value.toLowerCase();
+
+      orderRows.forEach(row => {
+        row.hidden = !row.textContent.toLowerCase().includes(searchText);
+      });
+    });
+
+    // Add team members
     const teamForm = document.getElementById("team-form");
+    const teamList = document.getElementById("team-list");
     const formMessage = document.getElementById("form-message");
 
-    teamForm.addEventListener("submit", function (event) {
+    teamForm.addEventListener("submit", event => {
       event.preventDefault();
 
       const name = document.getElementById("member-name").value.trim();
       const email = document.getElementById("member-email").value.trim();
-      const role = document.getElementById("member-role").value;
 
-      formMessage.textContent = name + " (" + role + ") was added successfully. Email: " + email;
-      formMessage.classList.remove("hidden");
+      if (!name || !email) return;
+
+      const item = document.createElement("li");
+      item.className = "rounded-xl bg-slate-100 p-4 dark:bg-slate-800";
+
+      const memberName = document.createElement("p");
+      memberName.className = "font-semibold";
+      memberName.textContent = name;
+
+      const memberEmail = document.createElement("p");
+      memberEmail.className = "text-sm text-slate-500";
+      memberEmail.textContent = email;
+
+      item.append(memberName, memberEmail);
+      teamList.appendChild(item);
+
+      formMessage.textContent = "Team member added successfully!";
       teamForm.reset();
     });
   </script>
-
 </body>
 </html>
