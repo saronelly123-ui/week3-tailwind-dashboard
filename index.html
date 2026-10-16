@@ -1,79 +1,102 @@
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="theme-color" content="#4f46e5">
   <title>Monthly Dashboard</title>
-  <link rel="stylesheet" href="./src/output.css" />
+  <link rel="stylesheet" href="./src/output.css">
+
   <script>
-    // Tailwind dark mode support
-    if (localStorage.getItem("dashboard-theme") === "dark") {
-      document.documentElement.classList.add("dark");
+    try {
+      if (localStorage.getItem("dashboard-theme") === "dark") {
+        document.documentElement.classList.add("dark");
+      }
+    } catch (error) {
+      console.warn("Theme preference is unavailable.");
     }
   </script>
 </head>
 
-<body class="min-h-screen bg-slate-50 text-slate-900 transition-colors duration-300 dark:bg-slate-950 dark:text-white">
-
+<body class="min-h-screen bg-slate-50 text-slate-900 dark:bg-slate-950 dark:text-white">
   <div class="flex min-h-screen">
 
-    <!-- Sidebar -->
-    <aside class="hidden w-64 flex-col border-r border-slate-200 bg-white p-5 dark:border-slate-800 dark:bg-slate-900 md:flex">
-      <a href="#" class="mb-10 flex items-center gap-3 text-2xl font-bold text-indigo-600">
+    <!-- Desktop Sidebar -->
+    <aside class="hidden w-64 shrink-0 flex-col border-r border-slate-200 bg-white p-5 dark:border-slate-800 dark:bg-slate-900 lg:flex">
+      <a href="#dashboard" class="mb-10 flex items-center gap-3 text-xl font-bold text-indigo-600">
         <span class="flex h-10 w-10 items-center justify-center rounded-xl bg-indigo-600 text-white">M</span>
         Monthly Dashboard
       </a>
 
-      <p class="mb-3 text-xs font-semibold uppercase tracking-wider text-slate-400">Menu</p>
+      <p class="mb-3 text-xs font-semibold uppercase text-slate-400">Menu</p>
 
-      <nav class="space-y-2">
+      <nav class="space-y-2" aria-label="Desktop navigation">
         <a href="#dashboard" class="block rounded-xl bg-indigo-50 px-4 py-3 font-semibold text-indigo-600 dark:bg-indigo-950 dark:text-indigo-300">📊 Dashboard</a>
-        <a href="#analytics" class="block rounded-xl px-4 py-3 text-slate-600 hover:bg-slate-100 dark:text-slate-300 dark:hover:bg-slate-800">📈 Analytics</a>
-        <a href="#orders" class="block rounded-xl px-4 py-3 text-slate-600 hover:bg-slate-100 dark:text-slate-300 dark:hover:bg-slate-800">🛒 Orders</a>
-        <a href="#products" class="block rounded-xl px-4 py-3 text-slate-600 hover:bg-slate-100 dark:text-slate-300 dark:hover:bg-slate-800">📦 Products</a>
-        <a href="#team" class="block rounded-xl px-4 py-3 text-slate-600 hover:bg-slate-100 dark:text-slate-300 dark:hover:bg-slate-800">👥 Team</a>
-        <a href="#settings" class="block rounded-xl px-4 py-3 text-slate-600 hover:bg-slate-100 dark:text-slate-300 dark:hover:bg-slate-800">⚙️ Settings</a>
+        <a href="#analytics" class="block rounded-xl px-4 py-3 hover:bg-slate-100 dark:hover:bg-slate-800">📈 Analytics</a>
+        <a href="#orders" class="block rounded-xl px-4 py-3 hover:bg-slate-100 dark:hover:bg-slate-800">🛒 Orders</a>
+        <a href="#products" class="block rounded-xl px-4 py-3 hover:bg-slate-100 dark:hover:bg-slate-800">📦 Products</a>
+        <a href="#team" class="block rounded-xl px-4 py-3 hover:bg-slate-100 dark:hover:bg-slate-800">👥 Team</a>
+        <a href="#settings" class="block rounded-xl px-4 py-3 hover:bg-slate-100 dark:hover:bg-slate-800">⚙️ Settings</a>
       </nav>
 
       <div class="mt-auto rounded-2xl bg-indigo-50 p-4 dark:bg-slate-800">
-        <p class="font-semibold text-slate-800 dark:text-white">Need help?</p>
+        <p class="font-semibold">Need help?</p>
         <p class="mt-1 text-sm text-slate-500 dark:text-slate-400">Contact our support team.</p>
-        <button class="mt-3 w-full rounded-lg bg-indigo-600 px-3 py-2 text-sm font-semibold text-white hover:bg-indigo-700">Get Support</button>
+        <button type="button" class="mt-3 w-full rounded-lg bg-indigo-600 px-3 py-2 text-white hover:bg-indigo-700">
+          Get Support
+        </button>
       </div>
     </aside>
-    <!-- Mobile Navigation -->
-      <nav class="mb-4 space-y-2 rounded-xl border border-slate-200 bg-white p-3 dark:border-slate-700 dark:bg-slate-900 md:hidden">
-       <a href="#dashboard" class="block rounded-lg p-3 hover:bg-slate-100 dark:hover:bg-slate-800">📊 Dashboard</a>
-       <a href="#analytics" class="block rounded-lg p-3 hover:bg-slate-100 dark:hover:bg-slate-800">📈 Analytics</a>
-       <a href="#orders" class="block rounded-lg p-3 hover:bg-slate-100 dark:hover:bg-slate-800">🛒 Orders</a>
-       <a href="#products" class="block rounded-lg p-3 hover:bg-slate-100 dark:hover:bg-slate-800">📦 Products</a>
-       <a href="#team" class="block rounded-lg p-3 hover:bg-slate-100 dark:hover:bg-slate-800">👥 Team</a>
-      </nav>
+
     <!-- Main Content -->
     <main id="dashboard" class="min-w-0 flex-1">
 
-      <!-- Topbar -->
-      <header class="sticky top-0 z-10 flex flex-wrap items-center justify-between gap-4 border-b border-slate-200 bg-white/90 px-4 py-4 backdrop-blur dark:border-slate-800 dark:bg-slate-900/90 sm:px-8">
-        <div>
-          <h1 class="text-xl font-bold sm:text-2xl">Dashboard</h1>
-          <p class="text-sm text-slate-500 dark:text-slate-400">Welcome back! Here's what's happening.</p>
+      <!-- Header -->
+      <header class="sticky top-0 z-20 flex flex-wrap items-center justify-between gap-4 border-b border-slate-200 bg-white/95 px-4 py-4 backdrop-blur dark:border-slate-800 dark:bg-slate-900/95 sm:px-8">
+
+        <div class="flex min-w-0 items-center gap-3">
+          <!-- Mobile Menu Button -->
+          <button
+            id="mobile-menu-button"
+            type="button"
+            class="inline-flex shrink-0 items-center justify-center rounded-lg border border-slate-300 p-2 hover:bg-slate-100 dark:border-slate-700 dark:hover:bg-slate-800 lg:hidden"
+            aria-label="Open navigation menu"
+            aria-expanded="false"
+            aria-controls="mobile-navigation"
+          >
+            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24"
+              viewBox="0 0 24 24" fill="none" stroke="currentColor"
+              stroke-width="2" stroke-linecap="round" aria-hidden="true">
+              <path d="M4 6h16M4 12h16M4 18h16"></path>
+            </svg>
+          </button>
+
+          <div class="min-w-0">
+            <h1 class="text-xl font-bold sm:text-2xl">Dashboard</h1>
+            <p class="text-sm text-slate-500 dark:text-slate-400">
+              Welcome back! Here's what's happening.
+            </p>
+          </div>
         </div>
 
         <div class="flex flex-wrap items-center gap-3">
-          <button
-            id="theme-toggle"
-            type="button"
-            class="rounded-xl border border-slate-200 px-3 py-2 text-sm font-semibold hover:bg-slate-100 dark:border-slate-700 dark:hover:bg-slate-800"
-            aria-label="Toggle dark mode"
-          >🌙 Dark Mode</button>
+          <button id="theme-toggle" type="button"
+            class="rounded-xl border border-slate-200 px-3 py-2 text-sm font-semibold hover:bg-slate-100 dark:border-slate-700 dark:hover:bg-slate-800">
+            🌙 Dark Mode
+          </button>
 
-          <button class="relative rounded-xl border border-slate-200 p-3 hover:bg-slate-100 dark:border-slate-700 dark:hover:bg-slate-800" aria-label="Notifications">
+          <button type="button"
+            class="relative rounded-xl border border-slate-200 p-3 dark:border-slate-700"
+            aria-label="Notifications">
             🔔
             <span class="absolute right-2 top-2 h-2 w-2 rounded-full bg-red-500"></span>
           </button>
 
           <div class="flex items-center gap-3">
-            <div class="flex h-10 w-10 items-center justify-center rounded-full bg-indigo-100 font-bold text-indigo-700 dark:bg-indigo-950 dark:text-indigo-300">SN</div>
+            <div class="flex h-10 w-10 items-center justify-center rounded-full bg-indigo-100 font-bold text-indigo-700 dark:bg-indigo-950 dark:text-indigo-300">
+              SN
+            </div>
             <div class="hidden sm:block">
               <p class="text-sm font-semibold">Saro Nelly</p>
               <p class="text-xs text-slate-500 dark:text-slate-400">Administrator</p>
@@ -82,63 +105,69 @@
         </div>
       </header>
 
+      <!-- Dashboard Content -->
       <div class="space-y-8 p-4 sm:p-8">
+
+        <!-- Mobile Navigation: hidden until button is clicked -->
+        <nav id="mobile-navigation"
+          class="hidden grid-cols-2 gap-2 rounded-xl border border-slate-200 bg-white p-3 dark:border-slate-700 dark:bg-slate-900 sm:grid-cols-3 lg:hidden"
+          aria-label="Mobile navigation">
+
+          <a href="#dashboard" class="rounded-lg p-3 text-sm hover:bg-slate-100 dark:hover:bg-slate-800">📊 Dashboard</a>
+          <a href="#analytics" class="rounded-lg p-3 text-sm hover:bg-slate-100 dark:hover:bg-slate-800">📈 Analytics</a>
+          <a href="#orders" class="rounded-lg p-3 text-sm hover:bg-slate-100 dark:hover:bg-slate-800">🛒 Orders</a>
+          <a href="#products" class="rounded-lg p-3 text-sm hover:bg-slate-100 dark:hover:bg-slate-800">📦 Products</a>
+          <a href="#team" class="rounded-lg p-3 text-sm hover:bg-slate-100 dark:hover:bg-slate-800">👥 Team</a>
+          <a href="#settings" class="rounded-lg p-3 text-sm hover:bg-slate-100 dark:hover:bg-slate-800">⚙️ Settings</a>
+        </nav>
 
         <!-- Welcome -->
         <section>
           <h2 class="text-2xl font-bold">Good evening, Saro! 👋</h2>
-          <p class="mt-1 text-slate-500 dark:text-slate-400">Here is an overview of your business today.</p>
+          <p class="mt-1 text-slate-500 dark:text-slate-400">
+            Here is an overview of your business today.
+          </p>
         </section>
 
         <!-- Statistics -->
         <section class="grid grid-cols-1 gap-5 sm:grid-cols-2 xl:grid-cols-4">
-          <div class="rounded-2xl border border-slate-200 bg-white p-5 shadow-sm dark:border-slate-800 dark:bg-slate-900">
+
+          <article class="rounded-2xl border border-slate-200 bg-white p-5 shadow-sm dark:border-slate-800 dark:bg-slate-900">
             <div class="flex items-center justify-between">
               <p class="text-sm text-slate-500 dark:text-slate-400">Total Revenue</p>
               <span class="rounded-xl bg-indigo-50 p-3 dark:bg-indigo-950">💰</span>
             </div>
             <p class="mt-4 text-3xl font-bold">RWF 8.4M</p>
             <p class="mt-2 text-sm font-semibold text-emerald-600">↑ 12.5% <span class="font-normal text-slate-500 dark:text-slate-400">from last month</span></p>
-          </div>
+          </article>
 
-          <div class="rounded-2xl border border-slate-200 bg-white p-5 shadow-sm dark:border-slate-800 dark:bg-slate-900">
+          <article class="rounded-2xl border border-slate-200 bg-white p-5 shadow-sm dark:border-slate-800 dark:bg-slate-900">
             <div class="flex items-center justify-between">
               <p class="text-sm text-slate-500 dark:text-slate-400">Total Orders</p>
               <span class="rounded-xl bg-amber-50 p-3 dark:bg-amber-950">🛒</span>
             </div>
             <p class="mt-4 text-3xl font-bold">1,284</p>
             <p class="mt-2 text-sm font-semibold text-emerald-600">↑ 8.2% <span class="font-normal text-slate-500 dark:text-slate-400">from last month</span></p>
-          </div>
+          </article>
 
-          <div class="rounded-2xl border border-slate-200 bg-white p-5 shadow-sm dark:border-slate-800 dark:bg-slate-900">
+          <article class="rounded-2xl border border-slate-200 bg-white p-5 shadow-sm dark:border-slate-800 dark:bg-slate-900">
             <div class="flex items-center justify-between">
               <p class="text-sm text-slate-500 dark:text-slate-400">Total Customers</p>
               <span class="rounded-xl bg-sky-50 p-3 dark:bg-sky-950">👥</span>
             </div>
-            ```html
-      <p class="mt-4 text-3xl font-bold">3,642</p>
-        <p class="mt-2 text-sm font-semibold text-emerald-600">
-        ↑6.4%
-       <span class="font-normal text-slate-500 dark:text-slate-400">
-           from last month
-         </span>
-           </p>
-            <p class="mt-3 text-xs text-slate-400">
-            Active customers this month
-            </p>
-```
-
+            <p class="mt-4 text-3xl font-bold">3,642</p>
             <p class="mt-2 text-sm font-semibold text-emerald-600">↑ 6.4% <span class="font-normal text-slate-500 dark:text-slate-400">from last month</span></p>
-          </div>
+            <p class="mt-3 text-xs text-slate-400">Active customers this month</p>
+          </article>
 
-          <div class="rounded-2xl border border-slate-200 bg-white p-5 shadow-sm dark:border-slate-800 dark:bg-slate-900">
+          <article class="rounded-2xl border border-slate-200 bg-white p-5 shadow-sm dark:border-slate-800 dark:bg-slate-900">
             <div class="flex items-center justify-between">
               <p class="text-sm text-slate-500 dark:text-slate-400">Pending Orders</p>
               <span class="rounded-xl bg-rose-50 p-3 dark:bg-rose-950">⏳</span>
             </div>
             <p class="mt-4 text-3xl font-bold">24</p>
             <p class="mt-2 text-sm font-semibold text-rose-600">Needs attention</p>
-          </div>
+          </article>
         </section>
 
         <!-- Revenue Chart -->
@@ -148,7 +177,8 @@
               <h2 class="text-lg font-bold">Revenue Overview</h2>
               <p class="text-sm text-slate-500 dark:text-slate-400">Monthly revenue performance</p>
             </div>
-            <select class="rounded-lg border border-slate-200 bg-white px-3 py-2 text-sm dark:border-slate-700 dark:bg-slate-800">
+            <select aria-label="Revenue period"
+              class="rounded-lg border border-slate-200 bg-white px-3 py-2 text-sm dark:border-slate-700 dark:bg-slate-800">
               <option>Last 7 months</option>
               <option>Last 30 days</option>
               <option>This year</option>
@@ -156,141 +186,121 @@
           </div>
 
           <div class="flex h-56 items-end justify-around gap-3 border-b border-l border-slate-200 px-3 dark:border-slate-700">
-            <div class="flex h-full w-8 flex-col justify-end"><div class="rounded-t-lg bg-indigo-300" style="height: 35%"></div><span class="py-2 text-center text-xs text-slate-500">Mar</span></div>
-            <div class="flex h-full w-8 flex-col justify-end"><div class="rounded-t-lg bg-indigo-400" style="height: 48%"></div><span class="py-2 text-center text-xs text-slate-500">Apr</span></div>
-            <div class="flex h-full w-8 flex-col justify-end"><div class="rounded-t-lg bg-indigo-500" style="height: 42%"></div><span class="py-2 text-center text-xs text-slate-500">May</span></div>
-            <div class="flex h-full w-8 flex-col justify-end"><div class="rounded-t-lg bg-indigo-400" style="height: 65%"></div><span class="py-2 text-center text-xs text-slate-500">Jun</span></div>
-            <div class="flex h-full w-8 flex-col justify-end"><div class="rounded-t-lg bg-indigo-500" style="height: 58%"></div><span class="py-2 text-center text-xs text-slate-500">Jul</span></div>
-            <div class="flex h-full w-8 flex-col justify-end"><div class="rounded-t-lg bg-indigo-600" style="height: 82%"></div><span class="py-2 text-center text-xs text-slate-500">Aug</span></div>
-            <div class="flex h-full w-8 flex-col justify-end"><div class="rounded-t-lg bg-indigo-700" style="height: 95%"></div><span class="py-2 text-center text-xs text-slate-500">Sep</span></div>
+            <div class="flex h-full w-8 flex-col justify-end"><div class="rounded-t-lg bg-indigo-300" style="height:35%"></div><span class="py-2 text-center text-xs text-slate-500">Mar</span></div>
+            <div class="flex h-full w-8 flex-col justify-end"><div class="rounded-t-lg bg-indigo-400" style="height:48%"></div><span class="py-2 text-center text-xs text-slate-500">Apr</span></div>
+            <div class="flex h-full w-8 flex-col justify-end"><div class="rounded-t-lg bg-indigo-500" style="height:42%"></div><span class="py-2 text-center text-xs text-slate-500">May</span></div>
+            <div class="flex h-full w-8 flex-col justify-end"><div class="rounded-t-lg bg-indigo-400" style="height:65%"></div><span class="py-2 text-center text-xs text-slate-500">Jun</span></div>
+            <div class="flex h-full w-8 flex-col justify-end"><div class="rounded-t-lg bg-indigo-500" style="height:58%"></div><span class="py-2 text-center text-xs text-slate-500">Jul</span></div>
+            <div class="flex h-full w-8 flex-col justify-end"><div class="rounded-t-lg bg-indigo-600" style="height:82%"></div><span class="py-2 text-center text-xs text-slate-500">Aug</span></div>
+            <div class="flex h-full w-8 flex-col justify-end"><div class="rounded-t-lg bg-indigo-700" style="height:95%"></div><span class="py-2 text-center text-xs text-slate-500">Sep</span></div>
           </div>
         </section>
 
-        <!-- Orders Table -->
+        <!-- Orders -->
         <section id="orders" class="overflow-hidden rounded-2xl border border-slate-200 bg-white shadow-sm dark:border-slate-800 dark:bg-slate-900">
           <div class="flex flex-wrap items-center justify-between gap-3 p-5 sm:p-6">
-            <
-<div>
-  <h2 class="text-lg font-bold">Recent Orders</h2>
-  <p class="text-sm text-slate-500 dark:text-slate-400">
-    Track your latest customer orders.
-  </p>
-  <input
-    id="order-search"
-    type="search"
-    placeholder="Search orders or customers..."
-    aria-label="Search orders by ID or customer"
-    class="mt-3 w-full rounded-xl border border-slate-200 bg-white px-4 py-2 text-sm outline-none focus:border-indigo-500 dark:border-slate-700 dark:bg-slate-800 sm:max-w-xs"
-  />
-</div>
-            <button class="rounded-xl bg-indigo-600 px-4 py-2 text-sm font-semibold text-white hover:bg-indigo-700">View All</button>
+            <div class="w-full sm:w-auto">
+              <h2 class="text-lg font-bold">Recent Orders</h2>
+              <p class="text-sm text-slate-500 dark:text-slate-400">Track your latest customer orders.</p>
+              <input id="order-search" type="search"
+                placeholder="Search orders or customers..."
+                aria-label="Search orders by ID or customer"
+                class="mt-3 w-full rounded-xl border border-slate-200 bg-white px-4 py-2 text-sm outline-none focus:border-indigo-500 dark:border-slate-700 dark:bg-slate-800 sm:max-w-xs">
+            </div>
+            <button type="button" id="view-all-orders"
+              class="rounded-xl bg-indigo-600 px-4 py-2 text-sm font-semibold text-white hover:bg-indigo-700">
+              View All
+            </button>
           </div>
 
           <div class="overflow-x-auto">
             <table class="w-full min-w-[650px] text-left text-sm">
               <thead class="bg-slate-50 text-xs uppercase text-slate-500 dark:bg-slate-800 dark:text-slate-300">
                 <tr>
-                  <th class="px-6 py-4">Order ID</th>
-                  <th class="px-6 py-4">Customer</th>
-                  <th class="px-6 py-4">Date</th>
-                  <th class="px-6 py-4">Amount</th>
-                  <th class="px-6 py-4">Status</th>
+                  <th scope="col" class="px-6 py-4">Order ID</th>
+                  <th scope="col" class="px-6 py-4">Customer</th>
+                  <th scope="col" class="px-6 py-4">Date</th>
+                  <th scope="col" class="px-6 py-4">Amount</th>
+                  <th scope="col" class="px-6 py-4">Status</th>
                 </tr>
               </thead>
               <tbody class="divide-y divide-slate-200 dark:divide-slate-800">
                 <tr>
-                  <td class="px-6 py-4 font-semibold">#ORD-1001</td>
-                  <td class="px-6 py-4">Alice Uwase</td>
-                  <td class="px-6 py-4 text-slate-500 dark:text-slate-400">Oct 11, 2026</td>
-                  <td class="px-6 py-4">RWF 125,000</td>
+                  <td class="px-6 py-4 font-semibold">#ORD-1001</td><td class="px-6 py-4">Alice Uwase</td><td class="px-6 py-4">Oct 11, 2026</td><td class="px-6 py-4">RWF 125,000</td>
                   <td class="px-6 py-4"><span class="rounded-full bg-emerald-100 px-3 py-1 text-xs font-semibold text-emerald-700 dark:bg-emerald-950 dark:text-emerald-300">Completed</span></td>
                 </tr>
                 <tr>
-                  <td class="px-6 py-4 font-semibold">#ORD-1002</td>
-                  <td class="px-6 py-4">Jeanine Mukamana</td>
-                  <td class="px-6 py-4 text-slate-500 dark:text-slate-400">Oct 10, 2026</td>
-                  <td class="px-6 py-4">RWF 89,000</td>
+                  <td class="px-6 py-4 font-semibold">#ORD-1002</td><td class="px-6 py-4">Jeanine Mukamana</td><td class="px-6 py-4">Oct 10, 2026</td><td class="px-6 py-4">RWF 89,000</td>
                   <td class="px-6 py-4"><span class="rounded-full bg-amber-100 px-3 py-1 text-xs font-semibold text-amber-700 dark:bg-amber-950 dark:text-amber-300">Pending</span></td>
                 </tr>
                 <tr>
-                  <td class="px-6 py-4 font-semibold">#ORD-1003</td>
-                  <td class="px-6 py-4">David Nkurunziza</td>
-                  <td class="px-6 py-4 text-slate-500 dark:text-slate-400">Oct 10, 2026</td>
-                  <td class="px-6 py-4">RWF 210,000</td>
+                  <td class="px-6 py-4 font-semibold">#ORD-1003</td><td class="px-6 py-4">David Nkurunziza</td><td class="px-6 py-4">Oct 10, 2026</td><td class="px-6 py-4">RWF 210,000</td>
                   <td class="px-6 py-4"><span class="rounded-full bg-sky-100 px-3 py-1 text-xs font-semibold text-sky-700 dark:bg-sky-950 dark:text-sky-300">Processing</span></td>
                 </tr>
                 <tr>
-                  <td class="px-6 py-4 font-semibold">#ORD-1004</td>
-                  <td class="px-6 py-4">Eric Habimana</td>
-                  <td class="px-6 py-4 text-slate-500 dark:text-slate-400">Oct 9, 2026</td>
-                  <td class="px-6 py-4">RWF 65,000</td>
+                  <td class="px-6 py-4 font-semibold">#ORD-1004</td><td class="px-6 py-4">Eric Habimana</td><td class="px-6 py-4">Oct 9, 2026</td><td class="px-6 py-4">RWF 65,000</td>
                   <td class="px-6 py-4"><span class="rounded-full bg-emerald-100 px-3 py-1 text-xs font-semibold text-emerald-700 dark:bg-emerald-950 dark:text-emerald-300">Completed</span></td>
                 </tr>
                 <tr>
-                  <td class="px-6 py-4 font-semibold">#ORD-1005</td>
-                  <td class="px-6 py-4">Grace Uwimana</td>
-                  <td class="px-6 py-4 text-slate-500 dark:text-slate-400">Oct 8, 2026</td>
-                  <td class="px-6 py-4">RWF 150,000</td>
+                  <td class="px-6 py-4 font-semibold">#ORD-1005</td><td class="px-6 py-4">Grace Uwimana</td><td class="px-6 py-4">Oct 8, 2026</td><td class="px-6 py-4">RWF 150,000</td>
                   <td class="px-6 py-4"><span class="rounded-full bg-rose-100 px-3 py-1 text-xs font-semibold text-rose-700 dark:bg-rose-950 dark:text-rose-300">Cancelled</span></td>
                 </tr>
                 <tr>
-                  <td class="px-6 py-4 font-semibold">#ORD-1006</td>
-                  <td class="px-6 py-4">Patrick Mugisha</td>
-                  <td class="px-6 py-4 text-slate-500 dark:text-slate-400">Oct 7, 2026</td>
-                  <td class="px-6 py-4">RWF 98,000</td>
+                  <td class="px-6 py-4 font-semibold">#ORD-1006</td><td class="px-6 py-4">Patrick Mugisha</td><td class="px-6 py-4">Oct 7, 2026</td><td class="px-6 py-4">RWF 98,000</td>
                   <td class="px-6 py-4"><span class="rounded-full bg-amber-100 px-3 py-1 text-xs font-semibold text-amber-700 dark:bg-amber-950 dark:text-amber-300">Pending</span></td>
                 </tr>
               </tbody>
             </table>
           </div>
+          <p id="search-message" class="hidden px-6 py-4 text-sm text-slate-500 dark:text-slate-400" role="status"></p>
         </section>
 
         <!-- Products and Activity -->
         <section class="grid grid-cols-1 gap-6 lg:grid-cols-2">
-          <div id="products" class="rounded-2xl border border-slate-200 bg-white p-5 shadow-sm dark:border-slate-800 dark:bg-slate-900">
+          <article id="products" class="rounded-2xl border border-slate-200 bg-white p-5 shadow-sm dark:border-slate-800 dark:bg-slate-900">
             <div class="mb-5 flex items-center justify-between">
               <h2 class="text-lg font-bold">Top Products</h2>
-              <button class="text-sm font-semibold text-indigo-600">See all</button>
+              <a href="#orders" class="text-sm font-semibold text-indigo-600 hover:underline">See orders</a>
             </div>
             <div class="space-y-5">
               <div class="flex items-center gap-4">
                 <div class="flex h-12 w-12 items-center justify-center rounded-xl bg-pink-100 text-xl">👕</div>
-                <div class="flex-1"><p class="font-semibold">Classic T-Shirt</p><p class="text-sm text-slate-500 dark:text-slate-400">320 sold</p></div>
-                <p class="font-semibold">RWF 15,000</p>
+                <div class="min-w-0 flex-1"><p class="font-semibold">Classic T-Shirt</p><p class="text-sm text-slate-500 dark:text-slate-400">320 sold</p></div>
+                <p class="text-sm font-semibold">RWF 15,000</p>
               </div>
               <div class="flex items-center gap-4">
                 <div class="flex h-12 w-12 items-center justify-center rounded-xl bg-amber-100 text-xl">👟</div>
-                <div class="flex-1"><p class="font-semibold">Sport Sneakers</p><p class="text-sm text-slate-500 dark:text-slate-400">210 sold</p></div>
-                <p class="font-semibold">RWF 45,000</p>
+                <div class="min-w-0 flex-1"><p class="font-semibold">Sport Sneakers</p><p class="text-sm text-slate-500 dark:text-slate-400">210 sold</p></div>
+                <p class="text-sm font-semibold">RWF 45,000</p>
               </div>
               <div class="flex items-center gap-4">
                 <div class="flex h-12 w-12 items-center justify-center rounded-xl bg-sky-100 text-xl">🎒</div>
-                <div class="flex-1"><p class="font-semibold">Travel Backpack</p><p class="text-sm text-slate-500 dark:text-slate-400">185 sold</p></div>
-                <p class="font-semibold">RWF 28,000</p>
+                <div class="min-w-0 flex-1"><p class="font-semibold">Travel Backpack</p><p class="text-sm text-slate-500 dark:text-slate-400">185 sold</p></div>
+                <p class="text-sm font-semibold">RWF 28,000</p>
               </div>
             </div>
-          </div>
+          </article>
 
-          <div class="rounded-2xl border border-slate-200 bg-white p-5 shadow-sm dark:border-slate-800 dark:bg-slate-900">
+          <article class="rounded-2xl border border-slate-200 bg-white p-5 shadow-sm dark:border-slate-800 dark:bg-slate-900">
             <h2 class="mb-5 text-lg font-bold">Recent Activity</h2>
             <div class="space-y-5">
               <div class="flex gap-3">
-                <span class="flex h-9 w-9 items-center justify-center rounded-full bg-emerald-100">✓</span>
+                <span class="flex h-9 w-9 shrink-0 items-center justify-center rounded-full bg-emerald-100">✓</span>
                 <div><p class="text-sm font-semibold">New order completed</p><p class="text-sm text-slate-500 dark:text-slate-400">Order #ORD-1001 was completed.</p><p class="mt-1 text-xs text-slate-400">10 minutes ago</p></div>
               </div>
               <div class="flex gap-3">
-                <span class="flex h-9 w-9 items-center justify-center rounded-full bg-sky-100">👤</span>
+                <span class="flex h-9 w-9 shrink-0 items-center justify-center rounded-full bg-sky-100">👤</span>
                 <div><p class="text-sm font-semibold">New customer registered</p><p class="text-sm text-slate-500 dark:text-slate-400">A new customer joined your store.</p><p class="mt-1 text-xs text-slate-400">35 minutes ago</p></div>
               </div>
               <div class="flex gap-3">
-                <span class="flex h-9 w-9 items-center justify-center rounded-full bg-amber-100">📦</span>
+                <span class="flex h-9 w-9 shrink-0 items-center justify-center rounded-full bg-amber-100">📦</span>
                 <div><p class="text-sm font-semibold">Product stock updated</p><p class="text-sm text-slate-500 dark:text-slate-400">Classic T-Shirt stock was updated.</p><p class="mt-1 text-xs text-slate-400">1 hour ago</p></div>
               </div>
             </div>
-          </div>
+          </article>
         </section>
 
-        <!-- Add Team Member Form -->
+        <!-- Team Form -->
         <section id="team" class="rounded-2xl border border-slate-200 bg-white p-5 shadow-sm dark:border-slate-800 dark:bg-slate-900 sm:p-6">
           <h2 class="text-lg font-bold">Add Team Member</h2>
           <p class="mb-5 text-sm text-slate-500 dark:text-slate-400">Add a new person to your team.</p>
@@ -298,17 +308,19 @@
           <form id="team-form" class="grid grid-cols-1 gap-4 sm:grid-cols-2">
             <label class="block">
               <span class="mb-2 block text-sm font-semibold">Full Name</span>
-              <input id="member-name" required type="text" placeholder="Enter full name" class="w-full rounded-xl border border-slate-200 bg-white px-4 py-3 outline-none focus:border-indigo-500 dark:border-slate-700 dark:bg-slate-800" />
+              <input id="member-name" required type="text" autocomplete="name" placeholder="Enter full name"
+                class="w-full rounded-xl border border-slate-200 bg-white px-4 py-3 outline-none focus:border-indigo-500 dark:border-slate-700 dark:bg-slate-800">
             </label>
 
             <label class="block">
               <span class="mb-2 block text-sm font-semibold">Email Address</span>
-              <input id="member-email" required type="email" placeholder="Enter email address" class="w-full rounded-xl border border-slate-200 bg-white px-4 py-3 outline-none focus:border-indigo-500 dark:border-slate-700 dark:bg-slate-800" />
+              <input id="member-email" required type="email" autocomplete="email" placeholder="Enter email address"
+                class="w-full rounded-xl border border-slate-200 bg-white px-4 py-3 outline-none focus:border-indigo-500 dark:border-slate-700 dark:bg-slate-800">
             </label>
 
             <label class="block">
               <span class="mb-2 block text-sm font-semibold">Role</span>
-              <select id="member-role" class="w-full rounded-xl border border-slate-200 bg-white px-4 py-3 outline-none focus:border-indigo-500 dark:border-slate-700 dark:bg-slate-800">
+              <select id="member-role" class="w-full rounded-xl border border-slate-200 bg-white px-4 py-3 dark:border-slate-700 dark:bg-slate-800">
                 <option>Administrator</option>
                 <option>Manager</option>
                 <option>Sales</option>
@@ -317,22 +329,61 @@
             </label>
 
             <div class="flex items-end">
-              <button type="submit" class="w-full rounded-xl bg-indigo-600 px-5 py-3 font-semibold text-white hover:bg-indigo-700">Add Member</button>
+              <button type="submit" class="w-full rounded-xl bg-indigo-600 px-5 py-3 font-semibold text-white hover:bg-indigo-700">
+                Add Member
+              </button>
             </div>
           </form>
 
-          <p id="form-message" class="mt-4 hidden rounded-xl bg-emerald-50 p-3 text-sm font-semibold text-emerald-700 dark:bg-emerald-950 dark:text-emerald-300" role="status"></p>
+          <p id="form-message" class="mt-4 hidden rounded-xl bg-emerald-50 p-3 text-sm font-semibold text-emerald-700 dark:bg-emerald-950 dark:text-emerald-300" role="status" aria-live="polite"></p>
         </section>
 
         <footer id="settings" class="pb-4 text-center text-sm text-slate-500 dark:text-slate-400">
           © 2026 Monthly Dashboard. All rights reserved.
         </footer>
-
       </div>
     </main>
   </div>
 
+  <!-- JavaScript -->
   <script>
+    // MOBILE MENU
+    const mobileMenuButton = document.getElementById("mobile-menu-button");
+    const mobileNavigation = document.getElementById("mobile-navigation");
+
+    function closeMobileMenu() {
+      mobileNavigation.classList.add("hidden");
+      mobileNavigation.classList.remove("grid");
+      mobileMenuButton.setAttribute("aria-expanded", "false");
+      mobileMenuButton.setAttribute("aria-label", "Open navigation menu");
+    }
+
+    mobileMenuButton.addEventListener("click", function () {
+      const willOpen = mobileNavigation.classList.contains("hidden");
+
+      mobileNavigation.classList.toggle("hidden", !willOpen);
+      mobileNavigation.classList.toggle("grid", willOpen);
+
+      mobileMenuButton.setAttribute("aria-expanded", String(willOpen));
+      mobileMenuButton.setAttribute(
+        "aria-label",
+        willOpen ? "Close navigation menu" : "Open navigation menu"
+      );
+    });
+
+    // Close menu when a navigation link is selected
+    mobileNavigation.querySelectorAll("a").forEach(function (link) {
+      link.addEventListener("click", closeMobileMenu);
+    });
+
+    // Close mobile menu when switching to laptop/desktop size
+    window.addEventListener("resize", function () {
+      if (window.innerWidth >= 1024) {
+        closeMobileMenu();
+      }
+    });
+
+    // DARK AND LIGHT MODE
     const themeToggle = document.getElementById("theme-toggle");
 
     function updateThemeButton() {
@@ -344,21 +395,54 @@
 
     themeToggle.addEventListener("click", function () {
       const isDark = document.documentElement.classList.toggle("dark");
-      localStorage.setItem("dashboard-theme", isDark ? "dark" : "light");
+
+      try {
+        localStorage.setItem("dashboard-theme", isDark ? "dark" : "light");
+      } catch (error) {
+        console.warn("Theme preference could not be saved.");
+      }
+
       updateThemeButton();
     });
 
-const orderSearch = document.getElementById("order-search");
-const orderRows = document.querySelectorAll("#orders tbody tr");
+    // SEARCH ORDERS
+    const orderSearch = document.getElementById("order-search");
+    const orderRows = Array.from(document.querySelectorAll("#orders tbody tr"));
+    const searchMessage = document.getElementById("search-message");
 
-orderSearch.addEventListener("input", function () {
-  const searchTerm = orderSearch.value.toLowerCase().trim();
+    orderSearch.addEventListener("input", function () {
+      const searchTerm = orderSearch.value.toLowerCase().trim();
+      let visibleCount = 0;
 
-  orderRows.forEach(function (row) {
-    const orderText = row.textContent.toLowerCase();
-    row.hidden = !orderText.includes(searchTerm);
-  });
-});
+      orderRows.forEach(function (row) {
+        const matches = row.textContent.toLowerCase().includes(searchTerm);
+        row.hidden = !matches;
+
+        if (matches) {
+          visibleCount++;
+        }
+      });
+
+      searchMessage.textContent = visibleCount === 0
+        ? "No orders match your search."
+        : visibleCount + (visibleCount === 1 ? " order found." : " orders found.");
+
+      searchMessage.classList.toggle("hidden", searchTerm === "");
+    });
+
+    // VIEW ALL ORDERS
+    document.getElementById("view-all-orders").addEventListener("click", function () {
+      orderSearch.value = "";
+
+      orderRows.forEach(function (row) {
+        row.hidden = false;
+      });
+
+      searchMessage.classList.add("hidden");
+      orderSearch.focus();
+    });
+
+    // ADD TEAM MEMBER FORM
     const teamForm = document.getElementById("team-form");
     const formMessage = document.getElementById("form-message");
 
@@ -369,11 +453,12 @@ orderSearch.addEventListener("input", function () {
       const email = document.getElementById("member-email").value.trim();
       const role = document.getElementById("member-role").value;
 
-      formMessage.textContent = name + " (" + role + ") was added successfully. Email: " + email;
+      formMessage.textContent =
+        name + " (" + role + ") was added successfully. Email: " + email;
+
       formMessage.classList.remove("hidden");
       teamForm.reset();
     });
   </script>
-
 </body>
 </html>
